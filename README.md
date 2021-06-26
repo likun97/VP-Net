@@ -17,11 +17,4 @@ You train your own network according to the unique training dataset.
 
 
 If this work is helpful, please cite it as:
-
-@article{xu2020sdpnet,
-  title={SDPNet: A Deep Network for Pan-Sharpening With Enhanced Information Representation},
-  author={Xu, Han and Ma, Jiayi and Shao, Zhenfeng and Zhang, Hao and Jiang, Junjun and Guo, Xiaojie},
-  journal={IEEE Transactions on Geoscience and Remote Sensing},
-  year={2020},
-  publisher={IEEE}
-}
+ 
