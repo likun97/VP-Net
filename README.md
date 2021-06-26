@@ -6,7 +6,9 @@ Implementation of "VP-Net: An Interpretable Deep Network for Variational Panshar
 
 
 # To test with the pretrained model:
-
-
+Run "CUDA_VISIBLE_DEVICES=0 python test.py" to test the network.
+Please first prepare the testing data shown as ./data.
 
 # To  train:
+Run "CUDA_VISIBLE_DEVICES=0 python train.py" to train the network.
+You train your own network according to the unique training dataset.
