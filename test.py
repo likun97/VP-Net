@@ -32,11 +32,11 @@ import scipy.io as sio
 #         used_ref.append(mat_ref) 
         
 # ============================================================================= 
+# ms_path  = 'E:\\datasets\\4_GF1_GF2\GF2\\crop_xj_smooth_down\\mat161_304_for_test' 
 
-# ms_path  = 'E:\\datasets\\4_GF1_GF2\GF2\\crop_xj_smooth_down\\mat161_304_for_test'  
 
-# we give 5 test examples  (from GF2 satellite)
 
+# we give 2 test examples  (from GF2 satellite)
 ms_path  = './data'                                  
 ms_file_list = os.listdir(ms_path)                                                          
 ms_file_list.sort(key=lambda x:int(x.split('.')[0].split('GF2_300_')[1]))        
