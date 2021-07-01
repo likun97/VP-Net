@@ -18,3 +18,14 @@ You train your own network according to the unique training dataset.
 
 If this work is helpful, please cite it as:
  
+@article{likun2020vp,
+  title={VP-Net: An Interpretable Deep Network for Variational Pansharpening},
+  author={Tian Xin, Kun Li, Zhongyuan Wang, and Jiayi Ma},
+  journal={IEEE Transactions on Geoscience and Remote Sensing},
+  year={2021},
+  volume={},
+  number={},
+  pages={},
+  doi={10.1109/TGRS.2021.3089868}，
+  publisher={IEEE}
+}
