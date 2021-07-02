@@ -12,14 +12,14 @@ running environment :
 python=3.7, tensorflow-gpu=1.15.0.
 
 If this work is helpful to you, please cite it as：
-"""
-@article{tian2021vp,
-  title={VP-Net: An Interpretable Deep Network for Variational Pansharpening},
-  author={Xin Tian, Kun Li, Zhongyuan Wang, and Jiayi Ma},
-  journal={IEEE Transactions on Geoscience and Remote Sensing},
-  volume={},
-  pages={},
-  year={2021},
-  publisher={IEEE}
-}
-"""
+
+      @article{tian2021vp,
+        title={VP-Net: An Interpretable Deep Network for Variational Pansharpening},
+        author={Xin Tian, Kun Li, Zhongyuan Wang, and Jiayi Ma},
+        journal={IEEE Transactions on Geoscience and Remote Sensing},
+        volume={},
+        pages={},
+        year={2021},
+        doi={10.1109/TGRS.2021.3089868},
+        publisher={IEEE}
+      } 
