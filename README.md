@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/26796531/124340069-39e16a80-dbe5-11eb-9452-6c55c1efde93.png)
+
 # VP-Net
 Implementation of VP-Net: An Interpretable Deep Network for Variational Pansharpening
 
@@ -5,7 +7,7 @@ Implementation of VP-Net: An Interpretable Deep Network for Variational Pansharp
 Run "CUDA_VISIBLE_DEVICES=0 python train.py" to train the network.
 
 # To Test:
-Run "CUDA_VISIBLE_DEVICES=0 python tes.py" to test the network.
+Run "CUDA_VISIBLE_DEVICES=0 python test.py" to test the network.
 
 
 running environment :
