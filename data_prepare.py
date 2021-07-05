@@ -8,7 +8,7 @@
 def single_mat_64_no_down(used_ref, used_ms, used_pan):
     
     
-# ###    '''normalization'''  TGARS所有数据都是自己一手做出来的 已经在matlab里标准化   这里不再需要标准化   
+# ###    '''normalization'''  已标准化    
 # =============================================================================
 #     max_patch, min_patch = np.max(used_ref, axis=(0,1)), np.min(used_ref, axis=(0,1))
 #     used_ref = np.float32(used_ref-min_patch) / (max_patch - min_patch)
@@ -37,7 +37,7 @@ def single_mat_64_no_down(used_ref, used_ms, used_pan):
             
             temp_hrhs = used_ref      [j:j+training_size,     k:k+training_size,  :]          
             temp_hrms = downgrade_PAN[j:j+training_size,     k:k+training_size,  :]
-#            temp_lrhs = downgrade_MS [j:j+training_size,     k:k+training_size,  :]                               #  对比  PanNet  
+#            temp_lrhs = downgrade_MS [j:j+training_size,     k:k+training_size,  :]                                
             temp_lrhs = downgrade_MS [int(j/4):int((j+training_size)/4),  int(k/4):int((k+training_size)/4), :]
             
             
@@ -153,7 +153,7 @@ def prepare_input_64(used_ms, used_pan):
             
             temp_hrhs = used_ms      [j:j+training_size,     k:k+training_size,  :]          
             temp_hrms = downgrade_PAN[j:j+training_size,     k:k+training_size,  :]
-#            temp_lrhs = downgrade_MS [j:j+training_size,     k:k+training_size,  :]                               #  对比  PanNet  
+#            temp_lrhs = downgrade_MS [j:j+training_size,     k:k+training_size,  :]                               
             temp_lrhs = downgrade_MS [int(j/4):int((j+training_size)/4),  int(k/4):int((k+training_size)/4), :]
             
             
