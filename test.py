@@ -9,32 +9,6 @@ import os
 import numpy as np
 import scipy.io as sio
 
-# ============================================================================= 
-# ms_path  = 'E:\datasets\\3_QB-Wuhan\\crop_xj_30_01_smooth_down\mat10'                                                   
-# ms_file_list = os.listdir(ms_path)                                                        
-# ms_file_list.sort(key=lambda x:int(x.split('.')[0].split('QB_WH_down_')[1]))          
- 
-# used_ms   = []
-# used_pan  = []
-# used_ref  = []
-
-# for file in ms_file_list:                                                                   
-#     if not os.path.isdir(file):                                                             
-#         mat_data = sio.loadmat(ms_path+"/"+file)                                           
-        
-#         mat_ms   = mat_data['I_MS_LR']   
-#         used_ms.append(mat_ms)
-        
-#         mat_pan   = mat_data['I_PAN_LR'] 
-#         used_pan.append(mat_pan) 
-        
-#         mat_ref   = mat_data['Ref'] 
-#         used_ref.append(mat_ref) 
-        
-# ============================================================================= 
-# ms_path  = 'E:\\datasets\\4_GF1_GF2\GF2\\crop_xj_smooth_down\\mat161_304_for_test' 
-
-
 
 # we give 2 test examples  (from GF2 satellite)
 ms_path  = './data'                                  
@@ -57,10 +31,9 @@ for file in ms_file_list:
         
         mat_ref   = mat_data['Ref'] 
         used_ref.append(mat_ref) 
-        
-        
-# ===============================================================================================     
-# ===============================================================================================  
+
+
+# -------------------------------------------------------------------
 model_path = './checkpoint/'            
 save_path  = 'test_1/'    # provide a folder name to save test result according to test dataset
 
@@ -143,13 +116,14 @@ with tf.Session(config=config) as sess:
        cv2.imwrite (save_testimage_dir +'%d_ms.png'%(num+1) ,  np.uint8(255*HR_Ref)    [:, :, [0,1,2]] ) 
        
         # save mat
-       sio.savemat (save_test_mat_dir  +'Variation_%d.mat'%(num+1), { 'ref':np.uint8(255*HR_Ref), 'fusion':np.uint8(255*test_label)} )
+       sio.savemat (
+           save_test_mat_dir  +'Variation_%d.mat'%(num+1), 
+           { 'ref':np.uint8(255*HR_Ref), 'fusion':np.uint8(255*test_label)}
+        )
        
        
-        
-       
+
        gt = HR_Ref 
-       
        ref_results={}
        ref_results.update({'metrics: ':'  PSNR,   SSIM,   SAM,   ERGAS,  SCC,     Q,     RMSE'})
        no_ref_results={}

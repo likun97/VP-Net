@@ -3,6 +3,11 @@
 # VP-Net
 Implementation of VP-Net: An Interpretable Deep Network for Variational Pansharpening
 
+<div align="center">    
+<img src=flowchart.png width="1000" height="800" alt="mflowchart">
+<!-- <img src=flowchart.png width="600" height="150" alt="mflowchart"> -->
+</div>
+
 # To Train:
 Run "CUDA_VISIBLE_DEVICES=0 python train.py" to train the network.
 

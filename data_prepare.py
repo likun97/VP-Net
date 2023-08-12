@@ -1,25 +1,16 @@
 # something about making dataset 
 
-
-
-
-
-
 def single_mat_64_no_down(used_ref, used_ms, used_pan):
-    
-    
-# ###    '''normalization'''  已标准化    
-# =============================================================================
-#     max_patch, min_patch = np.max(used_ref, axis=(0,1)), np.min(used_ref, axis=(0,1))
-#     used_ref = np.float32(used_ref-min_patch) / (max_patch - min_patch)
 
-#     max_patch, min_patch = np.max(used_ms, axis=(0,1)), np.min(used_ms, axis=(0,1))
-#     used_ms = np.float32(used_ms-min_patch) / (max_patch - min_patch)
-#     max_patch, min_patch = np.max(used_pan, axis=(0,1)), np.min(used_pan, axis=(0,1))
-#     used_pan = np.float32(used_pan-min_patch) / (max_patch - min_patch) 
+    # # if normalization done   
+    # max_patch, min_patch = np.max(used_ref, axis=(0,1)), np.min(used_ref, axis=(0,1))
+    # used_ref = np.float32(used_ref-min_patch) / (max_patch - min_patch)
+
+    # max_patch, min_patch = np.max(used_ms, axis=(0,1)), np.min(used_ms, axis=(0,1))
+    # used_ms = np.float32(used_ms-min_patch) / (max_patch - min_patch)
+    # max_patch, min_patch = np.max(used_pan, axis=(0,1)), np.min(used_pan, axis=(0,1))
+    # used_pan = np.float32(used_pan-min_patch) / (max_patch - min_patch) 
      
-# =============================================================================
-
     used_ref       = used_ref    # used_hrhs 
     downgrade_MS   = used_ms     # used_lrhs
     downgrade_PAN  = used_pan    # used_hrms
@@ -28,7 +19,7 @@ def single_mat_64_no_down(used_ref, used_ms, used_pan):
     train_downgrade_PAN    = []   
     train_downgrade_MS     = []
     
-###    """crop images""" 
+    # crop images
     stride        = 24
     training_size = 64  
     
@@ -37,9 +28,8 @@ def single_mat_64_no_down(used_ref, used_ms, used_pan):
             
             temp_hrhs = used_ref      [j:j+training_size,     k:k+training_size,  :]          
             temp_hrms = downgrade_PAN[j:j+training_size,     k:k+training_size,  :]
-#            temp_lrhs = downgrade_MS [j:j+training_size,     k:k+training_size,  :]                                
+            # temp_lrhs = downgrade_MS [j:j+training_size,     k:k+training_size,  :]                                
             temp_lrhs = downgrade_MS [int(j/4):int((j+training_size)/4),  int(k/4):int((k+training_size)/4), :]
-            
             
             train_original_used_MS.append(temp_hrhs)
             train_downgrade_PAN   .append(temp_hrms)
@@ -53,7 +43,7 @@ def single_mat_64_no_down(used_ref, used_ms, used_pan):
 
 
 
-# ======================================================================================================= 
+# -------------------------------------------------------------------
 import os
 import numpy as np
 import scipy.io as sio
@@ -105,15 +95,17 @@ train_original_used_MS = original_used_MS [index, :, :, :]
 train_downgrade_PAN    = downgrade_PAN [index, :, :, :]
 train_downgrade_MS     = downgrade_MS [index, :, :, :]
  
-sio.savemat('E:\GF2_train_from_single_pic_no_down_no_normal_60.mat', dict([('ms', train_downgrade_MS), ('pan', train_downgrade_PAN),('ref',train_original_used_MS)]) )
+sio.savemat(
+    'E:\GF2_train_from_single_pic_no_down_no_normal_60.mat', 
+    dict([('ms', train_downgrade_MS), ('pan', train_downgrade_PAN),('ref',train_original_used_MS)])
+)
 
 
-########################################################################################################################################
-########################################################################################################################################
+# -------------------------------------------------------------------
 
 def prepare_input_64(used_ms, used_pan):
     
-###    '''normalization'''
+    # '''normalization'''
     max_patch, min_patch = np.max(used_ms, axis=(0,1)), np.min(used_ms, axis=(0,1))
     used_ms = np.float32(used_ms-min_patch) / (max_patch - min_patch)
     max_patch, min_patch = np.max(used_pan, axis=(0,1)), np.min(used_pan, axis=(0,1))
@@ -121,25 +113,17 @@ def prepare_input_64(used_ms, used_pan):
     
     print('after normalization:')
     print('used_pan.shape' ,used_pan.shape,'used_ms.shape'  ,used_ms.shape) 
-    print('\n') 
     
-###############################################################################
-    
-###    '''downgrade'''
-    ratio=4
-
-    
+    # '''downgrade'''
+    ratio=4    
     downgrade_MS ,downgrade_PAN = downgrade_images(used_ms, used_pan, ratio, sensor= None)
-
     print('after normalization:')                            
     print('downgrade_PAN.shape',downgrade_PAN.shape,'downgrade_MS.shape' ,downgrade_MS.shape)
-###############################################################################
 
  
-###    """crop images""" 
+    # """crop images""" 
     stride        = 8
     training_size = 64                   
-    
     used_ms        = used_ms          # used_hrhs 
     downgrade_MS   = downgrade_MS     # used_lrhs
     downgrade_PAN  = downgrade_PAN    # used_hrms
@@ -153,7 +137,7 @@ def prepare_input_64(used_ms, used_pan):
             
             temp_hrhs = used_ms      [j:j+training_size,     k:k+training_size,  :]          
             temp_hrms = downgrade_PAN[j:j+training_size,     k:k+training_size,  :]
-#            temp_lrhs = downgrade_MS [j:j+training_size,     k:k+training_size,  :]                               
+            # temp_lrhs = downgrade_MS [j:j+training_size,     k:k+training_size,  :]                               
             temp_lrhs = downgrade_MS [int(j/4):int((j+training_size)/4),  int(k/4):int((k+training_size)/4), :]
             
             
@@ -182,5 +166,3 @@ def prepare_input_64(used_ms, used_pan):
     
     return train_original_used_MS, train_downgrade_PAN, train_downgrade_MS
 
-           
-        

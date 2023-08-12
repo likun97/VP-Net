@@ -84,7 +84,7 @@ def universal_image_quality_index_conv(x, y, kernelsize=8):
 
     return np.mean(Q_s)
 
-####################################################################################################################################
+# -------------------------------------------------------------------
 def rmse(img1, img2, dynamic_range=255):
   
     if not  img1.shape == img2.shape:
@@ -99,16 +99,13 @@ def rmse(img1, img2, dynamic_range=255):
           
     return np.sqrt(np.mean( np.square(img1_ - img2_) )  )
 
-# =================================================================================================================
 # ttps://github.com/Berhinj/Pansharpening/blob/10cef8395d0f4a30b663148c24486e59562df656/Pansharpening/quality.py
-# 根据这个网站的RMSE改写成下面    上下的RMSE结果一样  OK 
-# =================================================================================================================
+# 改写成下面 上下的RMSE结果一样 OK 
 
 def RMSEs(A, B):
     """ 
     Arguments:  A: np.ndarray             Stack of 1D bands
                 B: np.ndarray             Stack of 1D bands
-           
     Returns:    RMSEs: np.array           1D np array with one RMSE value per bands
     """
     A = A.astype(np.float64)
@@ -122,7 +119,8 @@ def RMSEs(A, B):
     s = np.mean(SE) ** 0.5
     
     return s
-# =================================================================================================================
+
+
 def RASE(A, B):
 
     """  
@@ -152,8 +150,9 @@ def RASE(A, B):
 
 import math  
 
-# =================================================================================================================
-#  仿照matlab 版本的代码     差别太大  ?  ?
+
+# -------------------------------------------------------------------
+#  仿照matlab版本的代码  差别太大 ? 
 def RASE_(img1, img2):
    
     img1 = img1.astype(np.float64)
@@ -162,8 +161,6 @@ def RASE_(img1, img2):
     [m,n,p]=img2.shape
     print(m,n,p)
  
-    
-    
     C1= np.square(img1[:,:,0]- - img2[:,:,0])
     C2= np.square(img1[:,:,1]- - img2[:,:,1])
     C3= np.square(img1[:,:,2]- - img2[:,:,2])
@@ -182,20 +179,14 @@ def RASE_(img1, img2):
     C4 = np.sum(C4)/(m*n)
     print(C1)
     # C4 = C4.reshape(m*n)
-    # C4 = np.sum(C4)/(m*n)      等价      # C4 = sum(map(sum,C4))/(m*n)
+    # C4 = np.sum(C4)/(m*n)
 
-    
     C = C1+C2+C3+C4
  
     mean = np.mean(np.mean(np.mean(img1, axis=0), axis=0), axis=0)
- 
-    N=    math.sqrt((C/4))  *100/mean;
-   
+    N=    math.sqrt((C/4))  *100/mean
     return N
 
-
-
-####################################################################################################################################
 
 def sam(img1, img2):
     """SAM for 3D image, shape (H, W, C); uint or float[0, 1]"""
@@ -213,13 +204,7 @@ def sam(img1, img2):
     
     # numerical stability
     cos_theta = (inner_product / (img1_spectral_norm * img2_spectral_norm + np.finfo(np.float64).eps)).clip(min=0, max=1)
-    
     return np.mean(np.arccos(cos_theta))*180/np.pi
-
-   #  问题就在*180/np.pi
-
-##################################################################################
- 
 
 
 def psnr(img1, img2, dynamic_range=255):
@@ -375,40 +360,28 @@ def ergas(img_fake, img_real, scale=4):
         raise ValueError('Wrong input image dimensions.')
         
         
-# =================================================================================================================
-# ttps://github.com/Berhinj/Pansharpening/blob/10cef8395d0f4a30b663148c24486e59562df656/Pansharpening/quality.py
-# 根据这个网站的RMSE改写成下面    上下  不一样
-# =================================================================================================================
+# https://github.com/Berhinj/Pansharpening/blob/10cef8395d0f4a30b663148c24486e59562df656/Pansharpening/quality.py
+# 根据这个网站的RMSE改写成下面 上下 不一样
 def ERGAS_(A, B):
 
     A = A.astype(np.float64)
     B = B.astype(np.float64)
-    
     A = A.reshape(A.shape[0]*A.shape[1],A.shape[2])
     B = B.reshape(B.shape[0]*B.shape[1],B.shape[2])
     
     SE = (B - A)**2
-    
     RMSEs = np.mean(SE) ** 0.5
-    
     f_ratio = 1 
-    
-    
     # Mean
     Ms = np.average(B, 0)
-    
     # Relative Dimensionless Global Error in Synthesis
     ERGAS = 100 * f_ratio**2 * (np.sum((RMSEs/Ms)**2)/A.shape[1])**0.5
-    
     return ERGAS
 
 
 
-####################
+# -------------------------------------------------------------------
 # observation model
-####################
-
-
 def gaussian2d(N, std):
     t = np.arange(-(N - 1) // 2, (N + 2) // 2)
     t1, t2 = np.meshgrid(t, t)
@@ -485,11 +458,8 @@ def mtf_resize(img, satellite='QuickBird', scale=4):
     return img_
 
 
-##################
+# -------------------------------------------------------------------
 # No reference IQA
-##################
-
-
 def D_lambda(img_fake, img_lm, block_size=32, p=1):
     """  Spectral distortion
                              img_fake,   generated HRMS
